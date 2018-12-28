@@ -1,0 +1,141 @@
+s.include("/include.ssc")
+f.set_page_title("Register")
+f.set_site_title("Register")
+
+//If we got a username we are getting a submission, so lets try and fill it
+if set pv.username
+	f.user_register()
+end
+
+t.content("<div style='text-align:center;max-width:400px;margin: 0px auto;'>")
+t.content("<form action=\"/register\" method=\"post\">")
+
+if notset pv.username
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Username</h3><input type=\"text\" name=\"username\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>First Name</h3><input type=\"text\" name=\"firstname\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Last Name</h3><input type=\"text\" name=\"lastname\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Email</h3><input type=\"text\" name=\"email\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Password</h3><input type=\"password\" name=\"password\">")
+else
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Username</h3><input type=\"text\" name=\"username\" value=\"pv.username\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>First Name</h3><input type=\"text\" name=\"name\" value=\"pv.firstname\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Last Name</h3><input type=\"text\" name=\"pv.lastname\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Email</h3><input type=\"text\" name=\"email\" value=\"pv.email\">")
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Password</h3><input type=\"password\" name=\"password\">")
+end
+
+t.content("<BR><input type=\"submit\" value=\"Submit\">")
+t.content("</form>")
+t.content("</div>")
+
+//##############################################################################
+//##############################################################################-- Register
+//##############################################################################
+f.user_register{
+	v.valid=true
+	v.message=""
+
+	//Check we got all the info needed
+	if notset pv.username
+		v.valid=false
+		v.message="invalid username"
+	end
+	if notset pv.email
+		v.valid=false
+		v.message="invalid email"
+	end
+	if notset pv.password
+		v.valid=false
+		v.message="invalid password"
+	end
+	if notset pv.firstname
+		v.valid=false
+		v.message="invalid first name"
+	end
+	if notset pv.lastname
+		v.valid=false
+		v.message="invalid last name"
+	end
+
+	//validate data first
+	if v.valid true
+		v.username=pv.username
+		v.username=s.string_clean("v.username")
+		v.username=s.string_lowercase("v.username")
+		v.username=s.string_username("v.username")
+		v.username=s.string_trim("v.username","50")
+		v.password=pv.password
+		v.password_orig=pv.password
+		v.password=s.string_clean("v.password")
+		v.password=s.password_hash("v.password")
+		v.email=pv.email
+		v.email=s.string_clean("v.email")
+		v.firstname=pv.firstname
+		v.firstname=s.string_url_decode("v.firstname")
+		v.firstname=s.string_clean("v.firstname")
+		v.firstname=s.string_trim("v.firstname","70")
+		v.lastname=pv.lastname
+		v.lastname=s.string_url_decode("v.lastname")
+		v.lastname=s.string_clean("v.lastname")
+		v.lastname=s.string_trim("v.lastname","70")
+
+		//Check email validate it first
+		v.validate=s.check_valid_email("v.email")
+		if v.validate false
+			v.valid=false
+			v.message="email is not valid"
+		end
+
+		//validate the username
+		v.data=s.mysql_select('SELECT * FROM users WHERE username='v.username' LIMIT 1')
+		if not v.data false
+			v.valid=false
+			v.message="username already taken"
+		end
+		v.size=s.string_length("v.username")
+		if v.size < 0
+			v.valid=false
+			v.message="username needs to be at least 1 character long"
+		end
+
+		//validate the first name
+		v.size=s.string_length("v.firstname")
+		if v.size < 2
+			v.valid=false
+			v.message="first name must be more then 1 characters"
+		end
+
+		//validate the last name
+		v.size=s.string_length("v.lastname")
+		if v.size < 2
+			v.valid=false
+			v.message="last name must be more then 2 characters"
+		end
+
+		//validate the password
+		v.size=s.string_length("v.password_orig")
+		if v.size < 9
+			v.valid=false
+			v.message="password must be more then 8 characters"
+		end
+
+		//If it all worked out we can register the user now
+		if v.valid true
+			v.date=s.timestamp()
+			v.number=s.mysql_insert("INSERT INTO users SET email='v.email',date_registered='v.date',username='v.username',password='v.password',first_name='v.firstname',last_name='v.lastname'")
+			if v.number false
+				v.message="insert failed"
+			else
+				v.message="We have created the user, with the username v.username."
+				sv.user_username=v.username
+				sv.user_id=s.mysql_lastid()
+				s.header("Location: /")
+			end
+			t.content("<div class='good'>v.message</div>")
+		else
+			t.content("<div class='error'>v.message</div>")
+		end
+	else
+		t.content("<div class='error'>v.message</div>")
+	end
+}

@@ -1,0 +1,13 @@
+s.include("/include.ssc")
+f.set_page_title("Welcome")
+f.set_site_title("The best new coding language")
+
+if set sv.username
+	t.content("<h2>Welcome back</h2>")
+	t.content("<h3>So great to see you sv.username?</h3>")
+	t.content("We are still working on this, soon you will be able to link your sites and manage them under one panel.")
+end
+
+v.content=s.file_read("/page_content/index.md")
+v.content=s.markdown(v.content)
+t.content(v.content)

@@ -1,0 +1,73 @@
+s.include("/include.ssc")
+f.set_page_title("Login")
+f.set_site_title("Login")
+
+//Hey someone is loggin in, lets give it a try.
+if set pv.username
+	f.user_login()
+end
+
+t.content("<div style='text-align:center;max-width:400px;margin: 0px auto;'>")
+t.content("<form action=\"/login\" method=\"post\">")
+if notset pv.username
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Username</h3><input type=\"text\" name=\"username\">")
+else
+	t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Username</h3><input type=\"text\" name=\"username\" value=\"pv.username\">")
+end
+t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Password</h3><input type=\"password\" name=\"password\">")
+t.content("<BR><input type=\"submit\" value=\"Submit\">")
+t.content("</form>")
+t.content("</>")
+
+//##############################################################################
+//##############################################################################-- Login
+//##############################################################################
+f.user_login{
+	v.valid=true
+	v.message=""
+
+	//Check we got all the info needed
+	if notset pv.username
+		v.valid=false
+		v.message="invalid username"
+	end
+	if notset pv.password
+		v.valid=false
+		v.message="invalid password"
+	end
+
+	//validate data first
+	if v.valid true
+		v.username=pv.username
+		v.username=s.string_clean("v.username")
+		v.username=s.string_lowercase("v.username")
+		v.username=s.string_username("v.username")
+		v.username=s.string_trim("v.username","50")
+		v.password=pv.password
+		v.password=s.string_clean("v.password")
+
+		v.data_db=s.mysql_select("SELECT * FROM users WHERE username='v.username' LIMIT 1")
+
+		if set v.data_db[username]
+			v.p_username=v.data_db[username]
+			v.p_password=v.data_db[password]
+			v.validate=s.password_verify("v.password","v.p_password")
+			if v.validate true
+				v.message="Welcome back!"
+				sv.user_username=v.data_db[username]
+				sv.user_id=v.data_db[id]
+				t.content("<div class='good'>v.message</div>")
+				s.header("Location: /")
+			else
+				v.message="invalid username or password"
+				t.content("<div class='error'>v.message</div>")
+			end
+		else
+			v.message="cant find user"
+			t.content("<div class='error'>v.message</div>")
+		end
+
+	else
+		t.content("<div class='error'>v.message</div>")
+	end
+}

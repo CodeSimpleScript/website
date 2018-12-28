@@ -1,0 +1,47 @@
+//Set template file
+s.template("/template.html")
+
+//Basic site info for the template
+t.title("SimpleScript")
+t.description("A free and open source coding language anyone can learn")
+t.credits("&copy; SimpleScript, a open source project. Original site design by <a href=\"https://html5up.net\">HTML5 UP</a>.")
+
+//Basic variables - none yet
+
+//Menu
+t.menu("<li><a href=\"/\">Welcome</a></li>")
+t.menu("<li><a href=\"/about\">About</a></li>")
+t.menu("<li><a href=\"https://discuss.codewithss.org/t/development\">Development log</a></li>")
+t.menu("<li><a href=\"https://discuss.codewithss.org/t/documentation\">Documentation</a></li>")
+t.menu("<li><a href=\"https://discuss.codewithss.org/t/code-examples\">Code Examples</a></li>")
+t.menu("<li><a href=\"https://discuss.codewithss.org\">Community</a></li>")
+
+//Load values
+v.db_server=s.storage_get("db_server")
+v.db_user=s.storage_get("db_user")
+v.db_password=s.storage_get("db_password")
+v.db_database=s.storage_get("db_database")
+
+//Check if values are set
+if not v.db_server=="localhost"
+  //Load in new values if passed via URL values, we only do this if we don't have any so someone cant hijack the connection
+  if set uv.server
+    s.storage_set("db_server",uv.server)
+    s.storage_set("db_user",uv.user)
+    s.storage_set("db_password",uv.password)
+    s.storage_set("db_database",uv.database)
+    s.echo("Thanks, database values set to uv.server, uv.user, uv.password, and uv.database, so thanks!")
+  end
+end
+
+//Connect MYSQL
+if v.db_server=="localhost"
+  v.db_connected=s.mysql_connect('v.db_server','v.db_user','v.db_password','v.db_database')
+  if v.db_connected false
+    gv.json_return[db_connection]="error"
+  else
+    gv.json_return[db_connection]="connected"
+  end
+end
+
+s.include("/functions.ssc")

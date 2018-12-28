@@ -1,0 +1,83 @@
+f.set_page_title{
+	v.title=v.function_passed[0]
+  t.page_title()
+  t.page_title(v.title)
+}
+
+f.set_site_title{
+	v.title=v.function_passed[0]
+  t.site_title()
+  t.site_title(v.title)
+}
+
+f.render_contentmd{
+	v.file=v.function_passed[0]
+
+	v.title=s.file_name(v.file,".md")
+	v.title=s.string_word_uppercase(v.title)
+
+	v.content=s.file_read(v.file)
+	v.content=s.markdown(v.content)
+	s.echo("<h2>v.title</h2>v.content")
+}
+
+f.render_contentmd_boxed{
+	v.file=v.function_passed[0]
+
+	v.title=s.file_name(v.file,".md")
+	v.title=s.string_word_uppercase(v.title)
+
+	v.content=s.file_read(v.file)
+	v.content=s.markdown(v.content)
+	s.echo("<div style='padding:10px;background:#f8f8f8;border-radius:5px;margin-bottom:15px;'><h2>v.title</h2>v.content</div>")
+}
+
+f.render_filetree{
+	v.file=v.function_passed[0]
+
+	v.title=s.file_name(v.file,".md")
+
+	if s.file_exists(v.file) true
+		v.link=v.file
+		v.link=s.string_replace("/page_content/documentation/","",v.link)
+		v.link=s.string_replace("/page_content/code examples/","",v.link)
+		v.link=s.string_replace("/page_content/changelog/","",v.link)
+		v.link=s.string_url_encode(v.link)
+
+		v.content=s.markdown(v.content)
+		s.echo("<li><a href='?page=v.link'>v.title</a></li>")
+	else
+		if s.folder_exists(v.file) true
+			v.title=s.string_replace("-","\s",v.title)
+			v.title=s.string_word_uppercase(v.title)
+
+			s.echo("<div style='margin-left:10px;'><h2>v.title</h2><ul>")
+			v.array=s.folder_content(v.file)
+			v.content_processed=s.array_loop("render_filetree",v.array)
+			s.echo(v.content_processed)
+			s.echo("</ul></div>")
+		end
+	end
+}
+
+f.get_user_name_full{
+  v.data_db=s.mysql_select("SELECT first_name,last_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  s.echo("v.data_db[first_name] v.data_db[last_name]")
+}
+
+f.get_user_name_first{
+  v.data_db=s.mysql_select("SELECT first_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  s.echo("v.data_db[first_name]")
+}
+
+f.get_user_name_last{
+  v.data_db=s.mysql_select("SELECT last_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  s.echo("v.data_db[last_name]")
+}
+
+f.permission_user_loggedin{
+  if notset sv.user_id
+    s.header("Location: /login")
+    s.quit()
+  end
+}
