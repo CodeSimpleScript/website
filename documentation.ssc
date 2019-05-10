@@ -1,6 +1,5 @@
 s.include("/include.ssc")
 
-
 if notset uv.page
 	f.set_page_title("Documentation")
 	f.set_site_title("Documentation")

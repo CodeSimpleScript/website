@@ -11,9 +11,8 @@ t.credits("&copy; SimpleScript, a open source project. Original site design by <
 //Menu
 t.menu("<li><a href=\"/\">Welcome</a></li>")
 t.menu("<li><a href=\"/about\">About</a></li>")
-t.menu("<li><a href=\"https://discuss.codewithss.org/t/development\">Development log</a></li>")
-t.menu("<li><a href=\"https://discuss.codewithss.org/t/documentation\">Documentation</a></li>")
-t.menu("<li><a href=\"https://discuss.codewithss.org/t/code-examples\">Code Examples</a></li>")
+t.menu("<li><a href=\"/documentation\">Documentation</a></li>")
+t.menu("<li><a href=\"/examples\">Code Examples</a></li>")
 t.menu("<li><a href=\"https://discuss.codewithss.org\">Community</a></li>")
 
 //Load values
