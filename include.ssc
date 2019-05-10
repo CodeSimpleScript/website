@@ -13,7 +13,7 @@ t.menu("<li><a href=\"/\">Welcome</a></li>")
 t.menu("<li><a href=\"/about\">About</a></li>")
 t.menu("<li><a href=\"/documentation\">Documentation</a></li>")
 t.menu("<li><a href=\"/examples\">Code Examples</a></li>")
-t.menu("<li><a href=\"https://discuss.codewithss.org\">Community</a></li>")
+t.menu("<li><a href=\"/changelog\">Changelog</a></li>")
 
 //Load values
 v.db_server=s.storage_get("db_server")

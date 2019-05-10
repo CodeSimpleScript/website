@@ -9,7 +9,7 @@ SimpleScript is still a work in progress and is not yet version 1.0, but it's mo
 * Fast, and easy to follow syntax. See [/about](/about) for code samples.
 
 # Download
-Download the simple PHP installer at [https://downloads.codewithss.org/installer.zip](https://downloads.codewithss.org/installer.zip). The installer will copy all files over and then ask you to set a default password. If you are running an older version you can run the installer to update it.
+Download the simple PHP installer at [https://github.com/CodeSimpleScript/installer/archive/master.zip](https://github.com/CodeSimpleScript/installer/archive/master.zip). The installer will copy all files over and then ask you to set a default password. If you are running an older version you can run the installer to update it.
 
 # Sponsors
 We are developing this as part of NodeHost by some of the staff to help new developers and people in school learn and teach code. You can check out NodeHost by visiting [https://www.nodehost.ca](https://www.nodehost.ca).
