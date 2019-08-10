@@ -122,7 +122,7 @@ f.user_register{
 		//If it all worked out we can register the user now
 		if v.valid true
 			v.date=s.timestamp()
-			v.number=s.mysql_insert("INSERT INTO users SET email='v.email',date_registered='v.date',username='v.username',password='v.password',first_name='v.firstname',last_name='v.lastname'")
+			v.number=s.mysql_insert("INSERT INTO accounts SET email='v.email',date_registered='v.date',username='v.username',password='v.password',first_name='v.firstname',last_name='v.lastname'")
 			if v.number false
 				v.message="insert failed"
 			else

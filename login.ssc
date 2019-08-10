@@ -46,7 +46,7 @@ f.user_login{
 		v.password=pv.password
 		v.password=s.string_clean("v.password")
 
-		v.data_db=s.mysql_select("SELECT * FROM users WHERE username='v.username' LIMIT 1")
+		v.data_db=s.mysql_select("SELECT * FROM accounts WHERE username='v.username' LIMIT 1")
 
 		if set v.data_db[username]
 			v.p_username=v.data_db[username]

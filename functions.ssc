@@ -61,17 +61,17 @@ f.render_filetree{
 }
 
 f.get_user_name_full{
-  v.data_db=s.mysql_select("SELECT first_name,last_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  v.data_db=s.mysql_select("SELECT first_name,last_name FROM accounts WHERE id='sv.user_id' LIMIT 1")
   s.echo("v.data_db[first_name] v.data_db[last_name]")
 }
 
 f.get_user_name_first{
-  v.data_db=s.mysql_select("SELECT first_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  v.data_db=s.mysql_select("SELECT first_name FROM accounts WHERE id='sv.user_id' LIMIT 1")
   s.echo("v.data_db[first_name]")
 }
 
 f.get_user_name_last{
-  v.data_db=s.mysql_select("SELECT last_name FROM users WHERE id='sv.user_id' LIMIT 1")
+  v.data_db=s.mysql_select("SELECT last_name FROM accounts WHERE id='sv.user_id' LIMIT 1")
   s.echo("v.data_db[last_name]")
 }
 
