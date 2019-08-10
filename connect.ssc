@@ -1,0 +1,31 @@
+s.include("/include.ssc")
+f.set_page_title("Connect")
+f.set_site_title("Connect")
+f.permission_user_loggedin()
+
+
+t.content("<div style='text-align:center;max-width:400px;margin: 0px auto;'>")
+t.content("<form action=\"/connect\" method=\"post\">")
+t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Key</h3><input type=\"text\" name=\"key\">")
+t.content("<BR><input type=\"submit\" value=\"Connect\">")
+t.content("</form>")
+t.content("</div>")
+
+if set pv.key
+
+	v.key=pv.key
+	v.key=s.string_clean("v.key")
+	v.key=s.string_lowercase("v.key")
+	v.key=s.string_username("v.key")
+	v.key=s.string_trim("v.key","200")
+
+	v.data_db=s.mysql_select("SELECT * FROM instances WHERE key='v.key' AND user='0' LIMIT 1")
+
+	if set v.data_db
+		s.header("Location: /dashbard/instances")
+		v.update=s.mysql_update("UPDATE instances SET user='sv.user_id' WHERE key='v.key' AND user='0'")
+	else
+		t.content("<div class='error'>Sorry but this key is not valid</div>")
+	end
+
+end
