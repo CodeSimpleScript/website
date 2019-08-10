@@ -8,7 +8,7 @@ if set uv.domain
 	v.authtoken=s.string_clean(uv.authtoken)
 	v.authtoken=s.string_trim("v.authtoken","200")
 
-	v.create=s.mysql_insert("INSERT INTO instances SET domain='v.domain',authtoken='v.key'")
+	v.create=s.mysql_insert("INSERT INTO instances SET domain='v.domain',authtoken='v.authtoken'")
 	if v.number false
 		s.echo("false")
 	else
