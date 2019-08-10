@@ -1,0 +1,17 @@
+s.include("/include.ssc")
+
+if set uv.domain
+	v.domain=s.string_clean(uv.domain)
+	v.domain=s.string_trim(v.domain,200)
+
+	v.key=s.string_clean(uv.key)
+	v.key=s.string_trim(v.key,200)
+
+	v.create=s.mysql_insert("INSERT INTO instances SET domain='v.domain',key='v.key'")
+	if v.number false
+		s.echo("false")
+	else
+		s.echo("true")
+	end
+
+end
