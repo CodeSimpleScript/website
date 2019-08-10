@@ -15,8 +15,6 @@ if set pv.key
 
 	v.key=pv.key
 	v.key=s.string_clean("v.key")
-	v.key=s.string_lowercase("v.key")
-	v.key=s.string_username("v.key")
 	v.key=s.string_trim("v.key","200")
 
 	v.data_db=s.mysql_select("SELECT * FROM instances WHERE key='v.key' AND user='0' LIMIT 1")
