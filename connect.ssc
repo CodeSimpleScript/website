@@ -23,7 +23,7 @@ if set pv.key
 
 	if set v.data_db
 		s.header("Location: /dashbard/instances")
-		v.update=s.mysql_update("UPDATE instances SET user='sv.user_id' WHERE key='v.key' AND user='0'")
+		v.update=s.mysql_update("UPDATE instances SET user='sv.user_id' WHERE authtoken='v.key' AND user='0'")
 	else
 		t.content("<div class='error'>Sorry but this key is not valid</div>")
 	end
