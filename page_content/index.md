@@ -11,5 +11,8 @@ SimpleScript is still a work in progress and is not yet version 1.0, but it's mo
 # Download
 Download the simple PHP installer at [https://github.com/CodeSimpleScript/installer/archive/master.zip](https://github.com/CodeSimpleScript/installer/archive/master.zip). The installer will copy all files over and then ask you to set a default password. If you are running an older version you can run the installer to update it.
 
+# Syntax support in code editors (atom)
+You can now install the syntax package directly into Atom [https://atom.io/packages/atom-language-ssc](https://atom.io/packages/atom-language-ssc).
+
 # Sponsors
 We are developing this as part of NodeHost by some of the staff to help new developers and people in school learn and teach code. You can check out NodeHost by visiting [https://www.nodehost.ca](https://www.nodehost.ca).
