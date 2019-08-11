@@ -12,7 +12,7 @@ if set pv.authtoken
 	v.data_db=s.mysql_select("SELECT * FROM instances WHERE authtoken='v.authtoken' AND user='0' LIMIT 1")
 
 	if set v.data_db[id]
-		s.header("Location: /dashbard/instances")
+		s.header("Location: /dashboard/instances")
 		v.update=s.mysql_update("UPDATE instances SET user='sv.user_id' WHERE authtoken='v.authtoken' AND user='0'")
 	else
 		t.content("<div class='error'>Sorry but this code is not valid: v.authtoken</div>")
