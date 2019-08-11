@@ -4,5 +4,22 @@ f.set_site_title("Account Dashboard")
 f.permission_user_loggedin()
 
 
-t.content("<h3>So great to see you f.get_user_name_first().</h3>")
-t.content("We are still building the SimpleScript site to include ability to comment on documentation, post bugs and suggestions, and even vote on new features you want to see.")
+t.content("<h2>So great to see you f.get_user_name_first().</h2>")
+t.content("SimpleScript is a free and open source lanuage. You can see all your SS instances below.")
+
+v.data_db=s.mysql_select("SELECT * FROM instances WHERE user='sv.user_id' ORDER BY id DESC LIMIT 500")
+if not v.data_db false
+  if set v.data_db[user]
+    f.process_instance_list(v.data_db)
+  else
+    s.array_loop("process_instance_list",v.data_db)
+  end
+else
+  t.content("<BR><BR><div class='message_warning'>You have no instances linked yet</div>")
+end
+
+f.process_instance_list{
+  v.data=v.function_passed[0]
+
+  t.content("<div class='percentbox_33'>v.data[domain]</div>")
+}

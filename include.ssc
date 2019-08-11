@@ -17,6 +17,14 @@ t.menu("<li><a href=\"/documentation\">Documentation</a></li>")
 t.menu("<li><a href=\"/examples\">Code Examples</a></li>")
 t.menu("<li><a href=\"/changelog\">Changelog</a></li>")
 
+if set sv.user_username
+  t.menu("<li><a href=\"/dashboard/\">Dashboard</a></li>")
+else
+  t.menu("<li><a href=\"/login\">Login</a></li>")
+  t.menu("<li><a href=\"/register\">Register</a></li>")
+end
+
+
 //Load values
 v.db_server=s.storage_get("db_server")
 v.db_user=s.storage_get("db_user")

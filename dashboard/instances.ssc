@@ -1,8 +1,0 @@
-s.include("/include.ssc")
-f.set_page_title("Account Dashboard")
-f.set_site_title("Account Dashboard")
-f.permission_user_loggedin()
-
-
-t.content("<h3>So great to see you f.get_user_name_first().</h3>")
-t.content("We are still building the SimpleScript site to include ability to comment on documentation, post bugs and suggestions, and even vote on new features you want to see.")
