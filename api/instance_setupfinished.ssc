@@ -1,0 +1,14 @@
+s.include("/include.ssc")
+
+if set uv.authtoken
+	v.authtoken=s.string_clean(uv.authtoken)
+	v.authtoken=s.string_trim("v.authtoken","200")
+
+	v.data_db=s.mysql_select("SELECT id FROM instances WHERE authtoken='v.authtoken' AND user!='0' LIMIT 1")
+	if v.data_db false
+		s.echo("false")
+	else
+		s.echo("true")
+	end
+
+end
