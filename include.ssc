@@ -4,7 +4,7 @@ s.template("/template.html")
 //Basic site info for the template
 t.title("SimpleScript")
 t.description("A free and open source coding language anyone can learn")
-t.credits("&copy; SimpleScript, a open source project. Original site design by <a href=\"https://html5up.net\">HTML5 UP</a>.")
+t.credits("&copy; SimpleScript, a open source project.")
 
 //Basic variables - none yet
 
