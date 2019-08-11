@@ -3,14 +3,6 @@ f.set_page_title("Connect")
 f.set_site_title("Connect")
 f.permission_user_loggedin()
 
-
-t.content("<div style='text-align:center;max-width:400px;margin: 0px auto;'>")
-t.content("<form action=\"/connect\" method=\"post\">")
-t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Code</h3><input type=\"text\" name=\"authtoken\">")
-t.content("<BR><input type=\"submit\" value=\"Connect\">")
-t.content("</form>")
-t.content("</div>")
-
 if set pv.authtoken
 
 	v.authtoken=pv.authtoken
@@ -19,7 +11,7 @@ if set pv.authtoken
 
 	v.data_db=s.mysql_select("SELECT * FROM instances WHERE authtoken='v.authtoken' AND user='0' LIMIT 1")
 
-	if set v.data_db
+	if set v.data_db[id]
 		s.header("Location: /dashbard/instances")
 		v.update=s.mysql_update("UPDATE instances SET user='sv.user_id' WHERE authtoken='v.authtoken' AND user='0'")
 	else
@@ -27,3 +19,11 @@ if set pv.authtoken
 	end
 
 end
+
+
+t.content("<div style='text-align:center;max-width:400px;margin: 0px auto;'>")
+t.content("<form action=\"/connect\" method=\"post\">")
+t.content("<h3 style='margin-top:15px;margin-bottom:5px;'>Code</h3><input type=\"text\" name=\"authtoken\">")
+t.content("<BR><input type=\"submit\" value=\"Connect\">")
+t.content("</form>")
+t.content("</div>")
