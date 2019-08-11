@@ -1,5 +1,7 @@
 //Set template file
-s.template("/template.html")
+if notset v.isapi
+  s.template("/template.html")
+end
 
 //Basic site info for the template
 t.title("SimpleScript")

@@ -1,3 +1,4 @@
+v.isapi=true
 s.include("/include.ssc")
 
 if set uv.authtoken
