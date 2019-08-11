@@ -4,7 +4,6 @@
 		<title>{{site_title}} | CodeSimpleScript</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css?v=3" />
 		<link rel="shortcut icon" href="/logo.png?v=2">
 		<meta name="description" content="{{description}}">
 		<meta property="og:title" content="{{site_title}} | CodeSimpleScript">
@@ -13,88 +12,112 @@
 		<meta property="og:image" content="https://www.codesimplescript.com/logo.png">
 		<meta property="og:site_name" content="CodeSimpleScript">
 		<meta property="og:description" content="{{description}}">
-		<script>
-			if(window.location.protocol != 'https:') {
-			 	location.href = location.href.replace("http://", "https://");
-			}
-			if(location.hostname != 'codewithss.org' && location.hostname != 'www.codewithss.org') {
-			 	location.href = location.href.replace("codesimplescript.com", "codewithss.org");
-			}
-		</script>
 		<style>
-			@media screen and (max-width: 736px) {
+			body{
+				background:rgb(35, 45, 50);
+				color:rgb(148, 163, 165);
+				font-weight: 300;
+				font-size: 17px;
+				line-height: 1.37;
+				font-smooth: always;
+				font-family: "Open Sans", Helvetica, Arial, sans-serif;
+				-webkit-font-smoothing: antialiased;
+			}
 
-				#wrapper{
-					max-width: 100% !important;
-				}
+			pre{
+			  background:rgb(55,68,89);
+			  border-radius:9px;
+			  color:rgb(216,219,221);
+			  border:2px solid rgb(27,38,56);
+			  padding:10px;
+			  margin-top:10px;
+			  margin-bottom:10px;
+			}
 
-				#nav {
-					display: block !important;
-					max-width: 100%;
-				}
-
-				#nav + #main {
-					padding-top: 6em !important;
-				}
+			wrapper{
+				display:block;
+				max-width:800px;
+				margin:0px auto;
+				box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+				-webkit-box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+				-moz-box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+				border-top-left-radius:5px;
+				border-top-right-radius:5px;
+				border:1px solid rgb(25, 33, 36);
+				margin-top:90px;
 
 			}
 
-			@media screen and (max-width: 980px) {
-				.spotlight {
-					text-align: left !important;
-				}
-				.spotlight .content header.major h2:after{
-					margin-left:0px;margin-right:0px;
-				}
+			header{
+				display:block;
+				background:rgb(61, 61, 61);
+				border-top-left-radius:5px;
+				border-top-right-radius:5px;
+				padding:10px;
+				font-weight: 500;
+				text-align:center;
+				border-bottom:1px solid rgb(68, 68, 68);
+				color:rgb(245, 245, 245);
+			}
+
+			nav{
+				display:block;
+				padding:5px;
+				text-align:center;
+				border-top:1px solid rgb(45, 45, 45);
+				background:rgb(45, 45, 45);
+				border-bottom:1px solid rgb(45, 45, 45);
+			}
+
+			nav ul{
+				margin:0px;
+				padding:0px;
+			}
+
+			nav li{
+				display:inline-block;
+				padding:5px;
+			}
+
+			content{
+				display:block;
+				padding:10px;
+				padding-top:20px;
+				padding-bottom:20px;
+				background:rgb(253, 246, 227);
+				color: rgb(93, 114, 120);
+			}
+			content h1{
+				display:block;
+				font-size:24px;
+				margin:0px;
+				margin-bottom:20px;
+				background:rgb(251, 239, 206);
+				border-left:2px solid rgb(233, 209, 141);
+				padding:10px;
+			}
+			footer{
+				display:block;
+				padding:10px;
+				text-align:center;
+				background:rgb(238, 232, 213);
+				color: rgb(93, 114, 120);
 			}
 		</style>
 	</head>
 	<body>
-		<div style="position:fixed;z-index:-500;left:0px;top:0px;width:100%;height:100%;background: url('https://source.unsplash.com/m1DZR0Q9c6w/1920x1080');background-size: cover !important;background-position: center center !important;"></div>
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1>{{title}}</h1>
-						<p>{{description}}</p><br />
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							{{menu}}
-						</ul>
-					</nav>
-
-					<div id="main">
-
-							<section id="intro" class="main">
-								<div class="content">
-									<header class="major">
-										<h2>{{page_title}}</h2>
-									</header>
-									{{content}}
-								</div>
-							</section>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">{{credits}}</p>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<wrapper>
+    	<header>{{title}}</header>
+      <nav>
+        <ul>{{menu}}</ul>
+      </nav>
+      <content>
+		    <h1>{{page_title}}</h1>
+				{{content}}
+			</content>
+			<footer>
+				{{credits}}
+			</footer>
+		</wraper>
 	</body>
 </html>
