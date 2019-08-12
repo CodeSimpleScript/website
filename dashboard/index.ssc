@@ -5,7 +5,6 @@ f.permission_user_loggedin()
 
 
 t.content("<h2>So great to see you f.get_user_name_first().</h2>")
-t.content("SimpleScript is a free and open source lanuage. You can see all your SS instances below.")
 
 v.data_db=s.mysql_select("SELECT * FROM instances WHERE user='sv.user_id' ORDER BY id DESC LIMIT 500")
 if not v.data_db false
@@ -21,5 +20,5 @@ end
 f.process_instance_list{
   v.data=v.function_passed[0]
 
-  t.content("<div class='percentbox_33'>v.data[domain]</div>")
+  t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;'><strong>v.data[domain]</strong><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]</div></div>")
 }
