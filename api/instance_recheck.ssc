@@ -22,12 +22,12 @@ f.process_instance_list{
 	v.sitecontes=s.http_request_get("http://v.data[domain]/ss-admin?command=hello&authtoken=v.authtoken")
 	v.sidata=s.json_decode(v.sitecontes)
 
-	if set v.sidata[version]
-		v.version=s.string_clean(v.sidata[version])
+	if set v.sidata[data][version]
+		v.version=s.string_clean(v.sidata[data][version])
 	end
 
-	if set v.sidata[https]
-		v.https=s.string_clean(v.sidata[https])
+	if set v.sidata[data][https]
+		v.https=s.string_clean(v.sidata[data][https])
 	end
 
 	v.update=s.mysql_update("UPDATE instances SET data_lastcheck='v.timestamp', data_version='v.version', data_https='v.https' WHERE authtoken='v.authtoken'")
