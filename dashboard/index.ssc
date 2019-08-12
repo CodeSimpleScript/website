@@ -1,6 +1,6 @@
 s.include("/include.ssc")
-f.set_page_title("Account Dashboard")
-f.set_site_title("Account Dashboard")
+f.set_page_title("Dashboard")
+f.set_site_title("Dashboard")
 f.permission_user_loggedin()
 
 
@@ -20,5 +20,5 @@ end
 f.process_instance_list{
   v.data=v.function_passed[0]
 
-  t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;'><strong>v.data[domain]</strong><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]</div></div>")
+  t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;text-align:center;'><strong>v.data[domain]</strong><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]</div></div>")
 }
