@@ -19,6 +19,5 @@ end
 
 f.process_instance_list{
   v.data=v.function_passed[0]
-
   t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;margin:5px;'><strong>v.data[domain]</strong><BR><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]</div></div>")
 }

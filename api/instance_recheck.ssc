@@ -1,0 +1,34 @@
+v.isapi=true
+s.include("/include.ssc")
+
+s.echo("<div>Checking instances...</div>")
+v.data_db=s.mysql_select("SELECT * FROM instances WHERE user!='0' ORDER BY data_lastcheck DESC LIMIT 5")
+if not v.data_db false
+  if set v.data_db[user]
+    f.process_instance_list(v.data_db)
+  else
+    s.array_loop("process_instance_list",v.data_db)
+  end
+end
+
+f.process_instance_list{
+  v.data=v.function_passed[0]
+	v.authtoken=v.data[authtoken]
+	v.timestamp=s.timestamp()
+	s.echo("<div>Updating v.data[id]</div>")
+	v.version="0.0.0"
+	v.https="false"
+
+	v.sitecontes=s.http_request_get("http://v.data[domain]/ss-admin?command=hello&authtoken=v.authtoken")
+	v.sidata=s.json_decode(v.sitecontes)
+
+	if set v.sidata[version]
+		v.version=s.string_clean(v.sidata[version])
+	end
+
+	if set v.sidata[https]
+		v.https=s.string_clean(v.sidata[https])
+	end
+
+	v.update=s.mysql_update("UPDATE instances SET data_lastcheck='v.timestamp', data_version='v.version', data_https='v.https' WHERE authtoken='v.authtoken'")
+}
