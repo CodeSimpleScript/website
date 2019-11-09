@@ -12,7 +12,7 @@ if not v.data_db false
   v.updatestatus=s.json_decode(v.contentr)
 
   t.content("<h2>Dashboard - Update</h2>")
-  t.content("Update in progress... v.contentr")
+  t.content("Update in progress for v.domain instance... v.contentr")
 
   if v.updatestatus[fail]=="authfail"
     t.content("<BR><BR><div class='message_warning'>This instance auth failed, it may not be setup anymore</div>")
