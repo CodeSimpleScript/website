@@ -8,7 +8,7 @@ v.id=s.string_clean(uv.id)
 
 v.data_db=s.mysql_select("SELECT * FROM instances WHERE user='sv.user_id' AND domain='v.domain' AND id='v.id' LIMIT 1")
 if not v.data_db false
-  v.contentr=s.http_request_get("http://v.data_db[domain]/ss-admin?command=update&authcode=v.data_db[authtoken]")
+  v.contentr=s.http_request_get("http://v.data_db[domain]/ss-admin?command=update&authtoken=v.data_db[authtoken]")
   v.updatestatus=s.json_decode(v.contentr)
 
   t.content("<h2>Dashboard - Update</h2>")
