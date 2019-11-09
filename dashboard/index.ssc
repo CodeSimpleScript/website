@@ -3,6 +3,10 @@ f.set_page_title("Dashboard")
 f.set_site_title("Dashboard")
 f.permission_user_loggedin()
 
+v.contentr=s.http_request_get("https://raw.githubusercontent.com/CodeSimpleScript/core/master/version.json")
+v.versioncheck=s.json_decode(v.contentr)
+gv.versionnow=v.versioncheck[version]
+gv.versionmessage=v.versioncheck[message]
 
 t.content("<h2>So great to see you f.get_user_name_first().</h2>")
 
@@ -19,5 +23,11 @@ end
 
 f.process_instance_list{
   v.data=v.function_passed[0]
-  t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;margin:5px;'><strong>v.data[domain]</strong><BR><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]</div></div>")
+  t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;margin:5px;'><strong>v.data[domain]</strong><BR><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]")
+
+  if not gv.versionnow==v.data[data_version]
+    t.content("<div>An update is ready!<BR>gv.versionmessage</div>")
+  end
+
+  t.content("</div></div>")
 }
