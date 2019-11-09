@@ -11,11 +11,13 @@ if not v.data_db false
   v.contentr=s.http_request_get("http://v.data_db[domain]/ss-admin?command=update&authtoken=v.data_db[authtoken]")
   v.updatestatus=s.json_decode(v.contentr)
 
+  v.donemessage=false
   t.content("Update in progress for v.domain instance...")
 
   if v.updatestatus[fail]=="authfail"
     t.content("<BR><BR><div class='message_warning'>This instance auth failed, it may not be setup anymore</div>")
     t.content("<a href='/dashboard'>Back to dashboard</a>")
+    v.donemessage=true
   end
 
   if v.updatestatus[data][update]=="done"
@@ -23,6 +25,12 @@ if not v.data_db false
 
     v.update=s.mysql_update("UPDATE instances SET data_version='v.updatestatus[data][version]' WHERE authtoken='v.data_db[authtoken]'")
 
+    t.content("<a href='/dashboard'>Back to dashboard</a>")
+    v.donemessage=true
+  end
+
+  if v.donemessage false
+    t.content("<BR><BR><div class='message_warning'>The update may or may not have finished, we did not get the standard response. v.contentr</div>")
     t.content("<a href='/dashboard'>Back to dashboard</a>")
   end
 
