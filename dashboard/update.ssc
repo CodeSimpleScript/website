@@ -12,10 +12,18 @@ if not v.data_db false
   v.updatestatus=s.json_decode(v.contentr)
 
   t.content("<h2>Dashboard - Update</h2>")
-  t.content("Update in progress for v.domain instance... v.contentr")
+  t.content("Update in progress for v.domain instance...")
 
   if v.updatestatus[fail]=="authfail"
     t.content("<BR><BR><div class='message_warning'>This instance auth failed, it may not be setup anymore</div>")
+    t.content("<a href='/dashboard'>Back to dashboard</a>")
+  end
+
+  if v.updatestatus[data][update]=="done"
+    t.content("<BR><BR><div class='message_good'>The update is installed and good to go! You are now rocking version v.updatestatus[data][version] of SimpleScript.</div>")
+
+    v.update=s.mysql_update("UPDATE instances SET data_version='v.updatestatus[data][version]' WHERE authtoken='v.data_db[authtoken]'")
+
     t.content("<a href='/dashboard'>Back to dashboard</a>")
   end
 
