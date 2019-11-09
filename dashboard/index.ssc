@@ -26,7 +26,7 @@ f.process_instance_list{
   t.content("<div class='percentbox_33'><div style='background:rgb(245, 245, 245);padding:10px;border-raidus:5px;margin:5px;'><strong>v.data[domain]</strong><BR><BR>Version: v.data[data_version]<BR>HTTPS: v.data[data_https]")
 
   if not gv.versionnow==v.data[data_version]
-    t.content("<div style='padding-top:10px;'><strong>An update is ready!</strong><div style='font-size:12px;'>gv.versionmessage</div><a href='/dashboard/update?domain=v.data[domain]'><button>Update</button></a></div>")
+    t.content("<div style='padding-top:10px;'><strong>An update is ready!</strong><div style='font-size:12px;'>gv.versionmessage</div><a href='/dashboard/update?domain=v.data[domain]&id=v.data[id]'><button>Update</button></a></div>")
   end
 
   t.content("</div></div>")

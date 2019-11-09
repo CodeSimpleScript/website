@@ -4,15 +4,22 @@ f.set_site_title("Dashboard - Update")
 f.permission_user_loggedin()
 
 v.domain=s.string_clean(uv.domain)
+v.id=s.string_clean(uv.id)
 
-v.data_db=s.mysql_select("SELECT * FROM instances WHERE user='sv.user_id' AND domain='v.domain' LIMIT 1")
+v.data_db=s.mysql_select("SELECT * FROM instances WHERE user='sv.user_id' AND domain='v.domain' AND id='v.id' LIMIT 1")
 if not v.data_db false
   v.contentr=s.http_request_get("http://v.data_db[domain]/ss-admin?command=update&authcode=v.data_db[authtoken]")
   v.updatestatus=s.json_decode(v.contentr)
 
   t.content("<h2>Dashboard - Update</h2>")
-  t.content("v.contentr")
+  t.content("Update in progress... v.contentr")
+
+  if v.updatestatus[fail]=="authfail"
+    t.content("<BR><BR><div class='message_warning'>This instance auth failed, it may not be setup anymore</div>")
+    t.content("<a href='/dashboard'>Back to dashboard</a>")
+  end
+
 else
   t.content("<BR><BR><div class='message_warning'>You have no instances linked yet</div>")
-  s.header("Location: /dashboard")
+  t.content("<a href='/dashboard'>Back to dashboard</a>")
 end
