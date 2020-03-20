@@ -28,7 +28,9 @@ f.process_instance_list{
 
   if set v.sidata[data][migration]
 		v.migration=s.string_clean(v.sidata[data][migration])
-	end
+	else
+    v.migration="0"
+  end
 
 	if set v.sidata[data][https]
 		if v.sidata[data][https]=="1"
