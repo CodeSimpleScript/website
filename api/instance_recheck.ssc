@@ -2,7 +2,7 @@ v.isapi=true
 s.include("/include.ssc")
 
 s.echo("<div>Checking instances...</div>")
-v.data_db=s.mysql_select("SELECT * FROM instances WHERE user!='0' ORDER BY data_lastcheck DESC LIMIT 5")
+v.data_db=s.mysql_select("SELECT * FROM instances WHERE user!='0' ORDER BY data_lastcheck ASC LIMIT 5")
 if not v.data_db false
   if set v.data_db[user]
     f.process_instance_list(v.data_db)
