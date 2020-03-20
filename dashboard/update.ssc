@@ -23,7 +23,7 @@ if not v.data_db false
   if v.updatestatus[data][update]=="done"
     t.content("<BR><BR><div class='message_good'>The update is installed and good to go! You are now rocking version v.updatestatus[data][version] of SimpleScript.</div>")
 
-    v.update=s.mysql_update("UPDATE instances SET data_version='v.updatestatus[data][version]' WHERE authtoken='v.data_db[authtoken]'")
+    v.update=s.mysql_update("UPDATE instances SET data_version='v.updatestatus[data][version]',data_migration='update' WHERE authtoken='v.data_db[authtoken]'")
 
     t.content("<a href='/dashboard'>Back to dashboard</a>")
     v.donemessage=true

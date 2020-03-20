@@ -28,8 +28,10 @@ f.process_instance_list{
   if not gv.versionnow==v.data[data_version]
     t.content("<div style='padding-top:10px;'><strong>An update is ready!</strong><div style='font-size:12px;'>gv.versionmessage</div><a href='/dashboard/update?domain=v.data[domain]&id=v.data[id]'><button>Update</button></a></div>")
   else
-    if v.data[data_migration]<2
-      t.content("<div style='padding-top:10px;'><strong>Manual update required</strong><div style='font-size:12px;'>This version is running a migration version behind the current version, as a result the site requires manual updating. (in most cases you can just update the contents of /admin), once done you can run force update to update.</div><a href='/dashboard/update?domain=v.data[domain]&id=v.data[id]'><button>Force Update</button></a></div>")
+    if not v.data[data_migration]=="update"
+      if v.data[data_migration]<2
+        t.content("<div style='padding-top:10px;'><strong>Manual update required</strong><div style='font-size:12px;'>This version is running a migration version behind the current version, as a result the site requires manual updating. (in most cases you can just update the contents of /admin), once done you can run force update to update.</div><a href='/dashboard/update?domain=v.data[domain]&id=v.data[id]'><button>Force Update</button></a></div>")
+      end
     end
   end
 
