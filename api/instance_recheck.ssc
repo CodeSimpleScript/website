@@ -26,6 +26,10 @@ f.process_instance_list{
 		v.version=s.string_clean(v.sidata[data][version])
 	end
 
+  if set v.sidata[data][core_migration]
+		v.migration=s.string_clean(v.sidata[data][core_migration])
+	end
+
 	if set v.sidata[data][https]
 		if v.sidata[data][https] true
 			v.https="true"
@@ -34,5 +38,5 @@ f.process_instance_list{
 		end
 	end
 
-	v.update=s.mysql_update("UPDATE instances SET data_lastcheck='v.timestamp', data_version='v.version', data_https='v.https' WHERE authtoken='v.authtoken'")
+	v.update=s.mysql_update("UPDATE instances SET data_lastcheck='v.timestamp', data_version='v.version', data_https='v.https', data_migration='v.migration' WHERE authtoken='v.authtoken'")
 }
