@@ -31,11 +31,7 @@ f.process_instance_list{
 	end
 
 	if set v.sidata[data][https]
-		if v.sidata[data][https] true
-			v.https="true"
-		else
-			v.https="false"
-		end
+		v.https=v.sidata[data][https]
 	end
 
 	v.update=s.mysql_update("UPDATE instances SET data_lastcheck='v.timestamp', data_version='v.version', data_https='v.https', data_migration='v.migration' WHERE authtoken='v.authtoken'")
