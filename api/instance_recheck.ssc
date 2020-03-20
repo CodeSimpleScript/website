@@ -26,8 +26,8 @@ f.process_instance_list{
 		v.version=s.string_clean(v.sidata[data][version])
 	end
 
-  if set v.sidata[data][core_migration]
-		v.migration=s.string_clean(v.sidata[data][core_migration])
+  if set v.sidata[data][migration]
+		v.migration=s.string_clean(v.sidata[data][migration])
 	end
 
 	if set v.sidata[data][https]
