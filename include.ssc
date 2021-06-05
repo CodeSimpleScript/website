@@ -12,9 +12,8 @@ t.credits("&copy; SimpleScript, a open source project.")
 
 //Menu
 t.menu("<li><a href=\"/about\">About</a></li>")
-t.menu("<li><a href=\"/documentation\">Documentation</a></li>")
+t.menu("<li><a href=\"https://docs.codewithss.org/\">Documentation</a></li>")
 t.menu("<li><a href=\"/examples\">Code Examples</a></li>")
-t.menu("<li><a href=\"/changelog\">Changelog</a></li>")
 
 if set sv.user_username
   t.menu("<li><a href=\"/dashboard/\">Dashboard</a></li>")
